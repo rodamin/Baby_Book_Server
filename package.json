@@ -1,0 +1,29 @@
+{
+  "name": "baby-book",
+  "version": "1.0.0",
+  "description": "server part in baby-book project",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodamin/Baby_Book_Server.git"
+  },
+  "keywords": [
+    "android"
+  ],
+  "author": "rodamin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodamin/Baby_Book_Server/issues"
+  },
+  "homepage": "https://github.com/rodamin/Baby_Book_Server#readme"
+}
