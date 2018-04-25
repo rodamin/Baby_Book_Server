@@ -6,7 +6,22 @@ var router = express.Router();
 
 mysql_dbc.test_open(connection);
 
+router.get('/:check_id',function(req,res){                                  //상대 계정이 parent에 있는지 점검
+    var check_id=req.params.check_id;
+    var select_sql ='select * from User where id = ?';
+    console.log(check_id);
+    connection.query(select_sql,[check_id],function(err,result){
+        if(err) throw err;
 
+        if(result.length>0)
+        {
+            console.log(result[0].mother_id);
+            res.status(201).json({success: '1'});                                                //있음
+        }else{
+            res.status(404).json({error: 'Unknown user'});                                       //없음
+        }
+    });
+});
 router.post('/',function(req,res){
     var sql = 'insert into User(id,password,name,gender,email) values(?,?,?,?,?)';
     var id = req.body.id;
