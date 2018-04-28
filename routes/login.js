@@ -5,12 +5,6 @@ var express = require('express');
 var router = express.Router();
 
 mysql_dbc.test_open(connection);
-
-router.get('/',function(req,res){
-    res.send('respond tmp');
-    var stmt = 'select password from User where id =?';
-
-});
 function findCode(req,res,id){                                                          //parent code find end store in session
     var sql2 = 'select code from Parent where mother_id = ? or father_id = ?';
     connection.query(sql2,[id,id],function(err,result){
