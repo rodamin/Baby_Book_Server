@@ -8,14 +8,19 @@ mysql_dbc.test_open(connection);
 function findCode(req,res,id){                                                          //parent code find end store in session
     var sql2 = 'select code from Parent where mother_id = ? or father_id = ?';
     connection.query(sql2,[id,id],function(err,result){
-        if(err) throw err;
+        if(err) 
+        {
+            res.status(404).json({error: 'query error'});
+            throw err;
+        }
         if(result.length>0)
         {
-            console.log(result[0]);
-            req.session.code=result[0].code;
-            console.log(req.session.code);
-            console.log("code session 저장 성공");
-            res.status(201).json({success: '1'});
+            //console.log(result[0]);
+            //req.session.code=result[0].code;
+            //console.log(req.session.code);
+            //console.log("code session 저장 성공");
+            console.log("login-test");
+            res.status(201).json(result);
         }else{
             res.status(404).json({error: 'Unknown user'});
         }
@@ -39,8 +44,6 @@ router.post('/',function(req,res){
             console.log(result[0].password);
             if(result[0].password == pw)
             {
-                req.session.user_id=id;
-                req.session.user_pw=pw;
 
                 console.log("로그인 성공");
                 

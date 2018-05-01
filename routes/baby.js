@@ -10,13 +10,15 @@ router.post('/store',function(req,res){
     var baby_name = req.body.baby_name;
     var gender = req.body.gender;
     var birth = req.body.birth;
-    var code = req.session.code;
+    var code = req.body.code;
+    console.log(code);
     connection.query(sql,[code,baby_name,gender,birth],function(err,result){
         if(err)
         {
             res.status(404).json({error:'query error'});
             throw err;
         }
+        res.status(201).json({success: '1'});  
     });
 });
 router.post('/update',function(req,res){
@@ -25,13 +27,14 @@ router.post('/update',function(req,res){
     var prev_baby_name = req.body.prev_baby_name;
     var gender = req.body.gender;
     var birth = req.body.birth;
-    var code = req.session.code;
+    var code = req.body.code;
     connection.query(sql,[new_baby_name,gender,birth,code,prev_baby_name],function(err,result){
         if(err)
         {
             res.status(404).json({error:'query error'});
             throw err;
         }
+        res.status(201).json({success: '1'});  
 
     });
 });
