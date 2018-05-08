@@ -10,6 +10,8 @@ var join = require('./routes/join');
 var conJoin = require('./routes/conJoin');
 var baby = require('./routes/baby');
 var growth = require('./routes/growth');
+var diary = require('./routes/diary');
+var story = require('./routes/story');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -26,6 +28,8 @@ app.use('/join',join);
 app.use('/conJoin',conJoin);
 app.use('/baby',baby);
 app.use('/growth',growth);
+app.use('/diary',diary);
+app.use('/story',story);
 var server = app.listen(3000,function(){
     console.log("hello");
 });

@@ -38,5 +38,29 @@ router.post('/update',function(req,res){
 
     });
 });
-
+router.post('/delete',function(req,res){
+    var baby_name = req.body.baby_name;
+    var code = req.body.code;
+    var sql = 'delete from Baby where baby_name = ? and code = ?';
+    connection.query(sql,[baby_name,code],function(err,result){
+        if(err) 
+        {
+            res.status(404).json({error: 'query error'});
+            throw err;
+        }
+        res.status(201).json({success:'1'});  
+    });
+});
+router.get('/load/:code',function(req,res){
+    var code = req.params.code;
+    var sql = 'select baby_name from Baby where code = ?';
+    connection.query(sql,[code],function(err,result){
+        if(err) 
+        {
+            res.status(404).json({error: 'query error'});
+            throw err;
+        }
+        res.status(201).json(result);
+    });
+});
 module.exports = router;
