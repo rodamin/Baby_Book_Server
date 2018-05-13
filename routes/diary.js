@@ -4,13 +4,36 @@ var connection = mysql_dbc.init();
 var express = require('express');
 var router = express.Router();
 
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../imgs/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+  
+var upload = multer({ storage: storage });
 mysql_dbc.test_open(connection);
-router.post('/add',function(req,res){
+
+router.post('/add',upload.array('userfile',4),function(req,res){
     var baby_name = req.body.baby_name; 
     var date_time = req.body.date_time;
     var subject = req.body.subject;
     var diary = req.body.diary;
     var code = req.body.code;
+    var files;
+    var sql1 = 'insert into Image(code,baby_name,date_time,idx,img_path) values(?,?,?,?,?)';
+    if(req.files.length>-1)
+    {
+        files = req.files;
+        console.log(files[i].path);
+        //for(var i=0;i<files.length;i++)
+        //{
+        //    connection.query(sql1,[code,baby_name,date_time,i,files[i].path]);
+        //}
+    }
     var sql = 'insert into Baby_Diary(baby_name,date_time,subject,diary,code) values(?,?,?,?,?)';
     connection.query(sql,[baby_name,date_time,subject,diary,code],function(err,result){
         if(err) 
