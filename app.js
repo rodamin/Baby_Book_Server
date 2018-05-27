@@ -12,8 +12,10 @@ var baby = require('./routes/baby');
 var growth = require('./routes/growth');
 var diary = require('./routes/diary');
 var story = require('./routes/story');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+var video = require('./routes/video')
+
+app.use(bodyParser.json({limit:'50mb'}));
+app.use(bodyParser.urlencoded({limit:'50mb',extended: true,parameterLimit:50000}));
 
 
 //app.use(cookieParser("3CCC4ACD-6ED1-4844-9217-82131BDCB239"));
@@ -30,6 +32,9 @@ app.use('/baby',baby);
 app.use('/growth',growth);
 app.use('/diary',diary);
 app.use('/story',story);
+app.use('/video',video);
+app.use(express.static('./'));
+
 var server = app.listen(3000,function(){
     console.log("hello");
 });

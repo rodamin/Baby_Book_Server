@@ -3,8 +3,8 @@ var connection = mysql_dbc.init();
 
 var express = require('express');
 var router = express.Router();
-
 mysql_dbc.test_open(connection);
+
 router.post('/store',function(req,res){
     var sql = 'insert into Baby(code,baby_name,gender,birth) values(?,?,?,?)';
     var baby_name = req.body.baby_name;
